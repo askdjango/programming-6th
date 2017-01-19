@@ -12,7 +12,7 @@ def webtoons_list_f(url):
     webtoon_lists_parent=soup.find('td',{'class':'title'}).parent.parent
     webtoon_lists=webtoon_lists_parent.find_all('tr')[2:]
 
-    save_webtoon=[]
+    mylist =[]
 
     for idx,webtoon_title in enumerate(webtoon_lists[::-1],len(webtoon_lists)):
         list=[]
@@ -22,9 +22,9 @@ def webtoons_list_f(url):
         list.append(title)
         list.append(href)
         list.append(date)
-        save_webtoon.append(list)
+        mylist.append(list)
 
-    return save_webtoon
+    return mylist
 
 
 
@@ -110,10 +110,10 @@ url_list=page_url('http://comic.naver.com/webtoon/list.nhn?titleId=679567&weekda
 
 result=[]
 for url in url_list:
-    save_webtoon=webtoons_list_f(url)
-    for save in save_webtoon:
+    mylist = webtoons_list_f(url)
+    for save in mylist:
         result.append(save)
-    image_save_f(save_webtoon)
+    image_save_f(mylist)
 
 
 
