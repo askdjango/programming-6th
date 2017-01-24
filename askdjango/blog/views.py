@@ -19,3 +19,13 @@ class NowTemplateView:
 post_list = NowTemplateView.as_view('blog/post_list.html')
 
 current_datetime = NowTemplateView.as_view()
+
+
+def hello(request, name):
+    return HttpResponse('안녕하세요. {}님.'.format(name))
+
+
+def mysum(request, x, y, z=0):
+    result = int(x) + int(y) + int(z)
+    return HttpResponse('결과는 {}입니다.'.format(result))
+
