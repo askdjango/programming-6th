@@ -15,6 +15,17 @@ body {
     <h1>AskDjango</h1>
     안녕. 장고야. 넌 참 아름답구나.
 
+    <ul>
+    {% for post in post_list %}
+    <li>
+        <a href="{% url "post_detail" post.pk %}">
+            <img src="{{ post.photo.url }}" style="width: 75px; height: 75px;" />
+            {{ post.title }}
+        </a>
+    </li>
+    {% endfor %}
+    </ul>
+
     <hr/>
     &copy; 이진석 2017
 </body>

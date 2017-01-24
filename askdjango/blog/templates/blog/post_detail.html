@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+<title>장고 블로그</title>
+<style>
+body {
+    background-color: pink;
+}
+</style>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+
+    <img src="{{ post.photo.url }}" />
+
+    {{ post.content|linebreaks }}
+
+    <a href="{% url "comment_new" post.pk %}">새 댓글</a>
+
+    <ul>
+    {% for comment in post.comment_set.all %}
+        <li>
+            {{ comment.message }}
+            at {{ comment.created_at }}
+            <a href="{% url "comment_edit" post.pk comment.pk %}">
+                수정
+            </a>
+            <a href="{% url "comment_delete" post.pk comment.pk %}">
+                삭제
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <hr/>
+    <a href="{% url "post_list" %}">목록으로</a>
+
+    <hr/>
+    &copy; 이진석 2017
+    }
+</body>
+</html>
