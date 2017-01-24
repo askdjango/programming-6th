@@ -3,24 +3,19 @@ from django.shortcuts import render
 import datetime
 
 
-def post_list(request):
-    '''
-    request.user
-    request.META['HTTP_USER_AGENT']
-    request.META['REMOTE_ADDR']
-    request.GET
-    request.POST
-    request.FILES
-    request.session
-    '''
-
-    now = datetime.datetime.now()
-
-    return render(request, 'blog/post_list.html', {
-        'now': now,
-    })
+class NowTemplateView:
+    @staticmethod
+    def as_view(template_name=None):
+        def view(request):
+            now = datetime.datetime.now()
+            if template_name is None:
+                return HttpResponse('현재 시각은 {}입니다.'.format(now))
+            return render(request, template_name, {
+                'now': now,
+            })
+        return view
 
 
-def current_datetime(request):
-    now = datetime.datetime.now()
-    return HttpResponse('현재 시간은 <b>{}</b> 입니다.'.format(now))
+post_list = NowTemplateView.as_view('blog/post_list.html')
+
+current_datetime = NowTemplateView.as_view()
