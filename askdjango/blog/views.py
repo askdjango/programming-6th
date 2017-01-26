@@ -28,6 +28,21 @@ def hello(request, name, age=None):
         message = '안녕하세요. {}님. {}세이시네요.'.format(name, age)
     else:
         message = '안녕하세요. {}님. 나이도 안 알려주고.'.format(name)
+
+    # request.GET   # QueryDict : key 중복을 허용하는 dict
+    # request.POST
+    # request.FILES
+
+    if 'name' in request.GET:
+        name = request.GET['name']  # 값을 하나만 가져옴.
+        name_list = ','.join(request.GET.getlist('name'))  # 다수 획득
+        message += '''
+        <ul>
+            <li>{}</li>
+            <li>{}</li>
+        </ul>
+        '''.format(name, name_list)
+
     return HttpResponse(message)
 
 
