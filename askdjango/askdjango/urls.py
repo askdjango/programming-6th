@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.post_list),
     url(r'^now/$', views.current_datetime),
+    url(r'^hello/$', views.hello_none),
     url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/$', views.hello),
+    url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/(?P<age>\d+)/$', views.hello),
     url(r'^sum/(?P<arg>[\d/]+)/$', views.mysum),
 ]

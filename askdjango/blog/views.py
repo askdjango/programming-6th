@@ -20,9 +20,15 @@ post_list = NowTemplateView.as_view('blog/post_list.html')
 
 current_datetime = NowTemplateView.as_view()
 
+def hello_none(request):
+    return HttpResponse('그냥 안녕!')
 
-def hello(request, name):
-    return HttpResponse('안녕하세요. {}님.'.format(name))
+def hello(request, name, age=None):
+    if age:
+        message = '안녕하세요. {}님. {}세이시네요.'.format(name, age)
+    else:
+        message = '안녕하세요. {}님. 나이도 안 알려주고.'.format(name)
+    return HttpResponse(message)
 
 
 def mysum(request, arg):
