@@ -22,6 +22,5 @@ urlpatterns = [
     url(r'^$', views.post_list),
     url(r'^now/$', views.current_datetime),
     url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/$', views.hello),
-    url(r'^sum/(?P<x>\d+)/(?P<y>\d+)/$', views.mysum),
-    url(r'^sum/(?P<x>\d+)/(?P<y>\d+)/(?P<z>\d+)/$', views.mysum),
+    url(r'^sum/(?P<arg>[\d/]+)/$', views.mysum),
 ]

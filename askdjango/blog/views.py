@@ -25,7 +25,8 @@ def hello(request, name):
     return HttpResponse('안녕하세요. {}님.'.format(name))
 
 
-def mysum(request, x, y, z=0):
-    result = int(x) + int(y) + int(z)
+def mysum(request, arg):
+    # arg  # "11321/12312/1231//123123/1231231///13123/"
+    result = sum(int(i or 0) for i in arg.split('/'))
     return HttpResponse('결과는 {}입니다.'.format(result))
 
