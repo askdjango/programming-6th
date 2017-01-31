@@ -13,7 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import include, url
 from django.contrib import admin
 from blog import views
 
@@ -26,3 +27,10 @@ urlpatterns = [
     url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/(?P<age>\d+)/$', views.hello),
     url(r'^sum/(?P<arg>[\d/]+)/$', views.mysum),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
+
