@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>네이버 웹툰 목록</title>
+</head>
+<body>
+    <ul>
+    {% for webtoon in webtoon_list %}
+    <li>
+        {{ webtoon.id }}
+        {{ webtoon.title }}
+    </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
+

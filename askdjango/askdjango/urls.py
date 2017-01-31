@@ -16,16 +16,19 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
-from blog import views
+from blog import views as blog_views
+from webtoon import views as webtoon_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.post_list),
-    url(r'^now/$', views.current_datetime),
-    url(r'^hello/$', views.hello_none),
-    url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/$', views.hello),
-    url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/(?P<age>\d+)/$', views.hello),
-    url(r'^sum/(?P<arg>[\d/]+)/$', views.mysum),
+    url(r'^$', blog_views.post_list),
+    url(r'^now/$', blog_views.current_datetime),
+    url(r'^hello/$', blog_views.hello_none),
+    url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/$', blog_views.hello),
+    url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/(?P<age>\d+)/$', blog_views.hello),
+    url(r'^sum/(?P<arg>[\d/]+)/$', blog_views.mysum),
+    url(r'^webtoon/$', webtoon_views.webtoon_list),
+    url(r'^webtoon/(?P<id>\d+)/$', webtoon_views.webtoon_detail),
 ]
 
 if settings.DEBUG:
