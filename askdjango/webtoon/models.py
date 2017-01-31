@@ -1,3 +1,5 @@
+import requests
+from bs4 import BeautifulSoup
 from django.db import models
 
 
@@ -8,4 +10,20 @@ class Webtoon(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+    @classmethod
+    def crawl_naver(cls):  # cls == Webtoon
+        url = "http://comic.naver.com/webtoon/weekday.nhn"
+        html = requests.get(url).text
+        soup = BeautifulSoup(html, 'html.parser')
+
+        for a_tag in soup.select('.daily_all li a'):
+            try:
+                title = a_tag['title']
+                cls.objects.create(title=title)
+                print('created', title)
+            except KeyError:
+                pass
+
+    # Webtoon.crawl_naver()
 
