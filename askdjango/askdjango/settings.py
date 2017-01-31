@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     # local apps
     'blog',
+    'webtoon',
 ]
 
 MIDDLEWARE = [
