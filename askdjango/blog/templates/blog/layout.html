@@ -1,25 +1,5 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+{% extends "layout.html" %}
 
-<title>AskDjango 블로그</title>
-<style>
-body {
-    background-color: pink;
-}
-</style>
-{% block extra_head %}
-{% endblock %}
-</head>
-<body>
-    <h1>AskDjango 블로그</h1>
+{% block window_title %}AskDjango 블로그{% endblock %}
 
-    {% block content %}
-    {% endblock %}
-
-    <hr/>
-    &copy; 이진석 2017
-</body>
-</html>
+{% block title %}AskDjango 블로그{% endblock %}
