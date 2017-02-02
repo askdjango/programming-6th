@@ -9,7 +9,38 @@
 body {
     background-color: pink;
 }
+#map {
+    width: 240px;
+    height: 120px;
+    background-color: blue;
+}
 </style>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+function initMap() {
+    var $map = $('#map');
+
+    if ( $map.size() > 0 ) {
+        var lat = $map.data('lat');
+        var lng = $map.data('lng');
+
+        var myLatLng = {'lat': lat, 'lng': lng};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 7,
+            center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!'
+        });
+    }
+}
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 </head>
 <body>
     <h1>AskDjango</h1>
@@ -23,12 +54,11 @@ body {
                 {{ tag.name }}
             {% endfor %}
         </li>
-        {% if post.lnglat %}
-        <li>
-            lnglat : {{ post.lnglat }}
-        </li>
-        {% endif %}
     </ul>
+
+    {% if post.lnglat %}
+        <div id="map" data-lat="{{ post.lat }}" data-lng="{{ post.lng }}"></div>
+    {% endif %}
 
     {{ post.content|linebreaks }}
 

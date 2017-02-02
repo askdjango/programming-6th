@@ -24,6 +24,15 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def lat(self):
+        if self.lnglat:
+            return self.lnglat.split(',')[-1]
+        return None
+
+    def lng(self):
+        if self.lnglat:
+            return self.lnglat.split(',')[0]
+        return None
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)
