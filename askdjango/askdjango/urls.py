@@ -22,11 +22,7 @@ from webtoon import views as webtoon_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', blog_views.post_list),
-    url(r'^now/$', blog_views.current_datetime),
-    url(r'^hello/$', blog_views.hello_none),
-    url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/$', blog_views.hello),
-    url(r'^hello/(?P<name>[ㄱ-힣]{2,4})/(?P<age>\d+)/$', blog_views.hello),
-    url(r'^sum/(?P<arg>[\d/]+)/$', blog_views.mysum),
+    url(r'^(?P<pk>\d+)/$', blog_views.post_detail),
     url(r'^webtoon/$', webtoon_views.webtoon_list),
     url(r'^webtoon/(?P<id>\d+)/$', webtoon_views.webtoon_detail),
 ]

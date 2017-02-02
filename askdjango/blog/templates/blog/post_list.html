@@ -13,10 +13,17 @@ body {
 </head>
 <body>
     <h1>AskDjango</h1>
-    안녕. 장고야. 넌 참 아름답구나.
+
+    <ul>
+    {% for post in post_list %}
+        <li>
+            {{ post.title }}
+            <small>at {{ post.updated_at }}</small>
+        </li>
+    {% endfor %}
+    </ul>
 
     <hr/>
-    {{ now }}
     &copy; 이진석 2017
 </body>
 </html>
