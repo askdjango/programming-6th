@@ -17,7 +17,11 @@ body {
     <ul>
     {% for post in post_list %}
         <li>
-            {{ post.title }}
+            [{{ post.pk }}]
+            <a href="/{{ post.pk }}/">  {# URL Reverse 기능 미적용 #}
+                {{ post.title }}
+            }
+            </a>
             <small>at {{ post.updated_at }}</small>
         </li>
     {% endfor %}

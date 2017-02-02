@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+<title>장고 블로그</title>
+<style>
+body {
+    background-color: pink;
+}
+</style>
+</head>
+<body>
+    <h1>AskDjango</h1>
+
+    <h2>{{ post.title }}</h2>
+
+    <ul>
+        <li>
+            Tags :
+            {% for tag in post.tag_set.all %}
+                {{ tag.name }}
+            {% endfor %}
+        </li>
+        {% if post.lnglat %}
+        <li>
+            lnglat : {{ post.lnglat }}
+        </li>
+        {% endif %}
+    </ul>
+
+    {{ post.content|linebreaks }}
+
+    <h3>Comments</h3>
+    <ul>
+    {% for comment in post.comment_set.all %}
+        <li>
+            {{ comment.message }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <hr/>
+    &copy; 이진석 2017
+</body>
+</html>
