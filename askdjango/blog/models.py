@@ -1,4 +1,5 @@
 import re
+from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ValidationError
 
@@ -9,6 +10,7 @@ def lnglat_validator(value):
 
 
 class Post(models.Model):
+    user = models.ForeignKey(User)
     author = models.CharField(max_length=20)
     title = models.CharField(max_length=100, verbose_name='제목', help_text='포스팅 제목으로 노출됩니다. 최대 100자까지 지원됩니다.')  # descriptor syntax
     content = models.TextField(verbose_name='내용')
