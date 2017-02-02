@@ -1,19 +1,6 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+{% extends "blog/layout.html" %}
 
-<title>장고 블로그</title>
-<style>
-body {
-    background-color: pink;
-}
-</style>
-</head>
-<body>
-    <h1>AskDjango</h1>
-
+{% block content %}
     <ul>
     {% for post in post_list %}
         <li>
@@ -25,8 +12,4 @@ body {
         </li>
     {% endfor %}
     </ul>
-
-    <hr/>
-    &copy; 이진석 2017
-</body>
-</html>
+{% endblock %}
