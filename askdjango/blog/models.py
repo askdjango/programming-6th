@@ -10,7 +10,7 @@ def lnglat_validator(value):
 
 
 class Post(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name='blog_post_set')
     author = models.CharField(max_length=20)
     title = models.CharField(max_length=100, verbose_name='제목', help_text='포스팅 제목으로 노출됩니다. 최대 100자까지 지원됩니다.')  # descriptor syntax
     content = models.TextField(verbose_name='내용')
