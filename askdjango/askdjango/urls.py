@@ -16,10 +16,16 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.shortcuts import redirect
 from blog import views as blog_views
 from webtoon import views as webtoon_views
 
+# def root(request):
+#     return redirect('post_list')
+
 urlpatterns = [
+    # url(r'^$', root),
+    url(r'^$', lambda request: redirect('post_list')),
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls')),
     url(r'^webtoon/', include('webtoon.urls')),
