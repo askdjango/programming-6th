@@ -25,11 +25,11 @@ from webtoon import views as webtoon_views
 
 urlpatterns = [
     # url(r'^$', root),
-    url(r'^$', lambda request: redirect('post_list')),
+    url(r'^$', lambda request: redirect('blog:post_list')),
     url(r'^admin/', admin.site.urls),
-    url(r'^blog/', include('blog.urls')),
-    url(r'^webtoon/', include('webtoon.urls')),
-    url(r'^game/', include('game.urls')),
+    url(r'^blog/', include('blog.urls', namespace='blog')),
+    url(r'^webtoon/', include('webtoon.urls', namespace='webtoon')),
+    url(r'^game/', include('game.urls', namespace='game')),
 ]
 
 if settings.DEBUG:
