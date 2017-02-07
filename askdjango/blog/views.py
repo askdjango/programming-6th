@@ -17,9 +17,7 @@ def post_detail(request, pk):
 
 
 def post_new(request):
-    if request.method == 'GET':
-        form = PostForm()
-    elif request.method == 'POST':
+    if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             print('통과한 값 : ', form.cleaned_data)
@@ -27,7 +25,9 @@ def post_new(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('blog:post_list')
+            return redirect(post)
+    else:
+        form = PostForm()
     return render(request, 'blog/post_form.html', {
         'form': form,
     })
@@ -36,9 +36,7 @@ def post_new(request):
 def post_edit(request, pk):
     post = Post.objects.get(pk=pk)
 
-    if request.method == 'GET':
-        form = PostForm(instance=post)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             print('통과한 값 : ', form.cleaned_data)
@@ -46,7 +44,9 @@ def post_edit(request, pk):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('blog:post_list')
+            return redirect(post)
+    else:
+        form = PostForm(instance=post)
     return render(request, 'blog/post_form.html', {
         'form': form,
     })

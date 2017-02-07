@@ -47,6 +47,9 @@ function initMap() {
 
     {{ post.content|linebreaks }}
 
+    <hr/>
+    <a href="{% url "blog:post_edit" post.pk %}">수정</a>
+
     <h3>Comments</h3>
     <ul>
     {% for comment in post.comment_set.all %}
