@@ -32,3 +32,22 @@ def post_new(request):
         'form': form,
     })
 
+
+def post_edit(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    if request.method == 'GET':
+        form = PostForm(instance=post)
+    elif request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            print('통과한 값 : ', form.cleaned_data)
+            # return redirect(post)
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('blog:post_list')
+    return render(request, 'blog/post_form.html', {
+        'form': form,
+    })
+
