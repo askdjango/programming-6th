@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls')),
     url(r'^webtoon/', include('webtoon.urls')),
+    url(r'^game/', include('game.urls')),
 ]
 
 if settings.DEBUG:
