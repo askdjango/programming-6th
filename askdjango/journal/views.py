@@ -18,7 +18,8 @@ def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = Post.objects.create(**form.cleaned_data)
+            post = form.save()
+            # post = Post.objects.create(**form.cleaned_data)
             return redirect(post)
     else:
         form = PostForm()
