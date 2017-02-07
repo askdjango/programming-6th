@@ -24,6 +24,9 @@ def post_new(request):
         if form.is_valid():
             print('통과한 값 : ', form.cleaned_data)
             # return redirect(post)
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             return redirect('blog:post_list')
     return render(request, 'blog/post_form.html', {
         'form': form,
