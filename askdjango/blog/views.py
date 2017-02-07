@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from blog.models import Post
+from blog.forms import PostForm
 
 
 def post_list(request):
@@ -16,8 +17,15 @@ def post_detail(request, pk):
 
 
 def post_new(request):
-    print(request.GET)
-    print(request.POST)
-    print(request.FILES)
-    return render(request, 'blog/post_form.html')
+    if request.method == 'GET':
+        form = PostForm()
+    elif request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            print('통과한 값 : ', form.cleaned_data)
+            # return redirect(post)
+            return redirect('blog:post_list')
+    return render(request, 'blog/post_form.html', {
+        'form': form,
+    })
 
