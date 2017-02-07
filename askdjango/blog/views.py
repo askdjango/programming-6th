@@ -14,3 +14,10 @@ def post_detail(request, pk):
         'post': post,
     })
 
+
+def post_new(request):
+    print(request.GET)
+    print(request.POST)
+    print(request.FILES)
+    return render(request, 'blog/post_form.html')
+
