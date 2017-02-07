@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^blog/', include('blog.urls', namespace='blog')),
     url(r'^webtoon/', include('webtoon.urls', namespace='webtoon')),
     url(r'^game/', include('game.urls', namespace='game')),
+    url(r'^journal/', include('journal.urls', namespace='journal')),
 ]
 
 if settings.DEBUG:

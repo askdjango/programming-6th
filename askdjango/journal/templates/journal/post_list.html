@@ -1,0 +1,19 @@
+
+<ul>
+{% for post in post_list %}
+    <li>
+        <a href="{{ post.get_absolute_url }}">
+            {{ post.title }}
+        </a>
+    </li>
+{% empty %}
+    <li>
+        등록된 포스팅이 없습니다.
+    </li>
+{% endfor %}
+</ul>
+
+<hr/>
+
+<a href="{% url "journal:post_new" %}">새 포스팅</a>
+

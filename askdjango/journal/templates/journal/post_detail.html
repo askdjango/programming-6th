@@ -1,0 +1,9 @@
+
+<h1>{{ post.title }}</h1>
+
+{{ post.content|linebreaks }}
+
+<hr/>
+
+<a href="{% url "journal:post_list" %}">글 목록</a>
+

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # local apps
     'accounts',
     'blog',
+    'journal',
     'game',
     'shop',
     'webtoon',
