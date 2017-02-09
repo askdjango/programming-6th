@@ -137,3 +137,8 @@ ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ['127.0.0.1']
 
+
+from django.contrib.messages import constants
+MESSAGE_TAGS = {constants.ERROR: 'danger'}
+MESSAGE_LEVEL = constants.DEBUG
+
