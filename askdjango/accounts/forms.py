@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import EmailValidator
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from accounts.models import Profile
 
 
@@ -19,4 +19,14 @@ class SignupForm(UserCreationForm):
         address = self.cleaned_data['address']
         Profile.objects.create(user=user, phone=phone, address=address)
         return user
+
+
+class LoginForm(AuthenticationForm):
+    answer = forms.IntegerField(label='3+3=?')
+
+    def clean_answer(self):
+        answer = self.cleaned_data.get('answer', 0)
+        if answer != 6:
+            raise forms.ValidationError('땡~!!!')
+        return answer
 
