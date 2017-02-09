@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from blog.models import Post
@@ -27,6 +28,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+            messages.info(request, '포스팅을 잘 저장했습니다.')
             return redirect(post)
     else:
         form = PostForm()
@@ -47,6 +49,7 @@ def post_edit(request, pk):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+            messages.info(request, '포스팅을 잘 저장했습니다.')
             return redirect(post)
     else:
         form = PostForm(instance=post)

@@ -22,6 +22,16 @@ body {
         <a href="{% url "logout" %}?next={{ request.path }}">로그아웃</a>
     {% endif %}
 
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>
+                [{{ message.tags }}] : {{ message.message }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
     <h1>{% block title %}{% endblock %}</h1>
 
     {% block content %}
