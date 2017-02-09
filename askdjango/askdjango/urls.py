@@ -27,6 +27,7 @@ urlpatterns = [
     # url(r'^$', root),
     url(r'^$', lambda request: redirect('blog:post_list')),
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('accounts.urls')),  # namespace 를 걸지않습니다.
     url(r'^blog/', include('blog.urls', namespace='blog')),
     url(r'^webtoon/', include('webtoon.urls', namespace='webtoon')),
     url(r'^game/', include('game.urls', namespace='game')),
