@@ -1,8 +1,15 @@
 
 <h1>{{ user }}'s Profile</h1>
 
-{{ user.email }}
-{{ user.date_joined }}
-{{ user.first_name }}
-{{ user.last_name }}
+<ul>
+    <li>{{ user.email }}</li>
+    <li>{{ user.date_joined }}</li>
+    <li>{{ user.first_name }}</li>
+    <li>{{ user.last_name }}</li>
+
+{% if user.profile %}
+    <li>{{ user.profile.phone }}</li>
+    <li>{{ user.profile.address }}</li>
+{% endif %}
+</ul>
 
