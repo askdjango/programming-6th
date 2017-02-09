@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from blog.models import Post
 from blog.forms import PostForm
@@ -16,6 +17,7 @@ def post_detail(request, pk):
     })
 
 
+@login_required
 def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -33,6 +35,7 @@ def post_new(request):
     })
 
 
+@login_required
 def post_edit(request, pk):
     post = Post.objects.get(pk=pk)
 
