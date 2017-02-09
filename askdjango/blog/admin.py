@@ -1,5 +1,6 @@
 from django.contrib import admin
 from blog.models import Post, Comment, Tag
+from blog.forms import PostForm
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -7,6 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ['title']
     list_filter = ['created_at']
     search_fields = ['title']
+    form = PostForm
 
     def content_length(self, post):
         return '{}글자'.format(len(post.content))
