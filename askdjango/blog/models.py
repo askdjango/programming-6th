@@ -47,6 +47,9 @@ class Comment(models.Model):
     post = models.ForeignKey(Post)
     message = models.TextField()
 
+    class Meta:
+        ordering = ['-id']
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)

@@ -50,6 +50,14 @@ function initMap() {
     <hr/>
     <a href="{% url "blog:comment_new" post.pk %}" class="btn btn-primary btn-block">댓글쓰기</a>
 
+    <ul>
+    {% for comment in post.comment_set.all %}
+        <li>
+            {{ comment.message }}
+        </li>
+    {% endfor %}
+    </ul>
+
     <hr/>
     <a href="{% url "blog:post_list" %}" class="btn btn-default">목록</a>
     <a href="{% url "blog:post_edit" post.pk %}" class="btn btn-primary">수정</a>
