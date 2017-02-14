@@ -56,6 +56,7 @@ function initMap() {
             {{ comment.message }}
             <small>by {{ comment.user }}</small>
             <a href="{% url "blog:comment_edit" post.pk comment.pk %}">Edit</a>
+            <a href="{% url "blog:comment_delete" post.pk comment.pk %}" class="text-danger">Delete</a>
         </li>
     {% endfor %}
     </ul>

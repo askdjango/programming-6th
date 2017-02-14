@@ -1,0 +1,15 @@
+{% extends "blog/layout.html" %}
+
+{% block content %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <p class="alert alert-danger">정말 삭제하시겠습니까? </p>
+
+        <a href="{{ comment.post.get_absolute_url }}" class="btn btn-default">취소하겠소.</a>
+        <input type="submit" value="진심입니다." class="btn btn-danger" />
+    </form>
+
+{% endblock %}
+
