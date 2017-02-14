@@ -48,6 +48,9 @@ function initMap() {
     {{ post.content|linebreaks }}
 
     <hr/>
+    <a href="{% url "blog:comment_new" post.pk %}" class="btn btn-primary btn-block">댓글쓰기</a>
+
+    <hr/>
     <a href="{% url "blog:post_list" %}" class="btn btn-default">목록</a>
     <a href="{% url "blog:post_edit" post.pk %}" class="btn btn-primary">수정</a>
 

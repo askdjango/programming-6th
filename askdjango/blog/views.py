@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from blog.models import Post
-from blog.forms import PostForm
+from blog.forms import PostForm, CommentForm
 
 
 def post_list(request):
@@ -56,4 +56,20 @@ def post_edit(request, pk):
     return render(request, 'blog/post_form.html', {
         'form': form,
     })
+
+
+def comment_new(request, post_pk):
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            # form.cleaned_data
+            comment = form.save()
+            messages.success(request, '새 댓글을 저장했습니다.')
+            return redirect(comment.post)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/comment_form.html', {
+        'form': form,
+    })
+
 
