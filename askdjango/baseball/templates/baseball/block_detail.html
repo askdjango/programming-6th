@@ -1,0 +1,51 @@
+{{ block }}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+.blind {
+    background-color: gray;
+}
+.photo {
+    background-color: green;
+}
+</style>
+
+<table id="seat-table">
+{% with seat_list=block.get_seat_list %}
+    {% for row_list in seat_list %}
+    <tr>
+        {% for row_idx, col_idx, seat in row_list %}
+        <td>
+            <div id="seat-{{ seat.pk }}" class="{% if seat.photo %}photo{% endif %} {% if seat.is_blind %}blind{% endif %}" {% if seat.photo %}data-photo-url="{{ seat.photo.url }}"{% endif %}>
+                {% if seat %}
+                    {{ seat }}
+                {% endif %}
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
+{% endwith %}
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div id="carousel-list">
+</div>
+
+<script>
+$(function() {
+    $('#seat-table *[data-photo-url]').each(function() {
+		var seat_id = $(this).attr("id");
+		var photo_url = $(this).data("photo-url");
+
+		$("#carousel-list").append("<div class='item'><img src='" + photo_url + "' /></div>");
+
+        console.log(seat_id + " : " + photo_url);
+    });
+
+	$("#carousel-list .item:eq(0)").addClass("active");
+});
+</script>
+

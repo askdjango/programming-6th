@@ -1,0 +1,27 @@
+seat_meta = """
+  XXXX       XXX
+  OOOO       OOO
+  OOOO       OOO
+  OOOO       OOO
+  OOOO       OOO
+  OOOO       OOO
+ OOOOOXXXXXXXOOO
+ OOOOOOOOOOOOOOO
+ OOOOOOOOOOOOOOO
+ OOOOOOOOOOOOOOO
+ OOOOOOOOOOOOOOO
+ OOOOOOOOOOOOOOO
+ OOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOO
+"""
+
+for row_idx, line in enumerate(seat_meta.splitlines()):
+    for col_idx, value in enumerate(tuple(line)):
+        print(row_idx, col_idx, value)
+

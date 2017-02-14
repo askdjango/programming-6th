@@ -1,2 +1,4 @@
-<table>
-</table>
+{% for block in block_list %}
+    <a href="{% url "baseball:block_detail" block.pk %}">{{ block.name }}</a>
+{% endfor %}
+
