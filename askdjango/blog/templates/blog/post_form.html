@@ -1,7 +1,7 @@
 {% extends "blog/layout.html" %}
 
 {% block content %}
-    <form method="post" action="">
+    <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <table class="table table-bordered table-hover">
             {{ form }}
