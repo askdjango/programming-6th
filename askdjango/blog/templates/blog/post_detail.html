@@ -48,6 +48,47 @@ function initMap() {
 
     <hr/>
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">
+        Ajax로 댓글 쓰기
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <form id="ajax_comment_form" action="{% url "blog:comment_new" post.pk %}" method="post">
+            {% csrf_token %}
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">댓글 쓰기</h4>
+                    </div>
+                    <div class="modal-body">
+                        {{ comment_form.message }}
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="저장" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $(function() {
+            $('#ajax_comment_form').ajaxForm(function(html) {
+                $('#comment_list').prepend(html);
+                $('#ajax_comment_form')[0].reset();
+                alert("modal 창을 dismiss"); // TODO:
+            });
+        });
+    </script>
+
+    <hr/>
+
+    {% comment %}
     <form id="comment_form" action="{% url "blog:comment_new" post.pk %}" method="post">
         {% csrf_token %}
         {{ comment_form.message }}
@@ -61,6 +102,7 @@ function initMap() {
             });
         });
     </script>
+    {% endcomment %}
 
     <!--
     <a href="{% url "blog:comment_new" post.pk %}" class="btn btn-primary btn-block">댓글쓰기</a>
