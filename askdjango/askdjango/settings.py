@@ -135,6 +135,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'askdjango', 'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'statcfiles')
 
 ALLOWED_HOSTS = ['*']
 

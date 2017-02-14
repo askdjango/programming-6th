@@ -1,4 +1,10 @@
 {% extends "layout.html" %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static "blog/style.css" %}" />
+    {{ block.super }}
+{% endblock %}
 
 {% block window_title %}AskDjango 블로그{% endblock %}
 
