@@ -78,6 +78,10 @@ def comment_new(request, post_pk):
             comment.user = request.user
             comment.post = post
             comment.save()
+            if request.is_ajax():
+                return render(request, 'blog/_comment.html', {
+                    'comment': comment,
+                })
             messages.success(request, '새 댓글을 저장했습니다.')
             return redirect(comment.post)
     else:

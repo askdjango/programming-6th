@@ -1,7 +1,6 @@
 {% extends "blog/layout.html" %}
 
 {% block extra_head %}
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script>
 function initMap() {
     var $map = $('#map');
@@ -49,27 +48,27 @@ function initMap() {
 
     <hr/>
 
-    <form action="{% url "blog:comment_new" post.pk %}" method="post">
+    <form id="comment_form" action="{% url "blog:comment_new" post.pk %}" method="post">
         {% csrf_token %}
         {{ comment_form.message }}
         <input type="submit" class="btn btn-primary btn-block" value="댓글 쓰기" />
     </form>
+    <script>
+        $(function() {
+            $('#comment_form').ajaxForm(function(html) {
+                $('#comment_list').prepend(html);
+                $('#comment_form')[0].reset();
+            });
+        });
+    </script>
 
     <!--
     <a href="{% url "blog:comment_new" post.pk %}" class="btn btn-primary btn-block">댓글쓰기</a>
     -->
 
-    <ul>
+    <ul id="comment_list">
     {% for comment in post.comment_set.all %}
-        <li>
-            {{ comment.message }}
-            <small>by {{ comment.user }}</small>
-
-            {% if comment.user == user %}
-                <a href="{% url "blog:comment_edit" post.pk comment.pk %}">Edit</a>
-                <a href="{% url "blog:comment_delete" post.pk comment.pk %}" class="text-danger">Delete</a>
-            {% endif %}
-        </li>
+        {% include "blog/_comment.html" %}
     {% endfor %}
     </ul>
 
