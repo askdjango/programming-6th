@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_extensions',
     # local apps
     'accounts',
+    'baseball',
     'blog',
     'journal',
     'game',

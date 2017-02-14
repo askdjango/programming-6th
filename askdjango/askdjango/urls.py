@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^webtoon/', include('webtoon.urls', namespace='webtoon')),
     url(r'^game/', include('game.urls', namespace='game')),
     url(r'^journal/', include('journal.urls', namespace='journal')),
+    url(r'^baseball/', include('baseball.urls', namespace='baseball')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
