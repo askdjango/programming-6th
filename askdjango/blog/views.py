@@ -58,6 +58,7 @@ def post_edit(request, pk):
     })
 
 
+@login_required
 def comment_new(request, post_pk):
     post = Post.objects.get(pk=post_pk)
 
@@ -66,6 +67,7 @@ def comment_new(request, post_pk):
         if form.is_valid():
             # form.cleaned_data
             comment = form.save(commit=False)
+            comment.user = request.user
             comment.post = post
             comment.save()
             messages.success(request, '새 댓글을 저장했습니다.')

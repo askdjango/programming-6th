@@ -1,4 +1,5 @@
 import re
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core.validators import MinLengthValidator
@@ -43,8 +44,10 @@ class Post(models.Model):
             return self.lnglat.split(',')[0]
         return None
 
+
 class Comment(models.Model):
     post = models.ForeignKey(Post)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     message = models.TextField()
 
     class Meta:

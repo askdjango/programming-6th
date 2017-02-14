@@ -54,6 +54,7 @@ function initMap() {
     {% for comment in post.comment_set.all %}
         <li>
             {{ comment.message }}
+            <small>by {{ comment.user }}</small>
         </li>
     {% endfor %}
     </ul>
