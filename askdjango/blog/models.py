@@ -19,7 +19,7 @@ class Post(models.Model):
             validators=[MinLengthValidator(10)],
             verbose_name='제목', help_text='포스팅 제목으로 노출됩니다. 최대 100자까지 지원됩니다.')  # descriptor syntax
     content = models.TextField(verbose_name='내용')
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='blog/%Y/%m/%d/%H')
     lnglat = models.CharField(max_length=50, blank=True,
             validators=[lnglat_validator])
     tag_set = models.ManyToManyField('Tag', blank=True)
