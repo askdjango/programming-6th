@@ -59,11 +59,15 @@ def post_edit(request, pk):
 
 
 def comment_new(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
             # form.cleaned_data
-            comment = form.save()
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
             messages.success(request, '새 댓글을 저장했습니다.')
             return redirect(comment.post)
     else:
