@@ -54,12 +54,12 @@ function initMap() {
     <hr/>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ajax-comment-modal">
         Ajax로 댓글 쓰기
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="ajax-comment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
         <form id="ajax_comment_form" action="{% url "blog:comment_new" post.pk %}" method="post">
             {% csrf_token %}
@@ -86,7 +86,7 @@ function initMap() {
             $('#ajax_comment_form').ajaxForm(function(html) {
                 $('#comment_list').prepend(html);
                 $('#ajax_comment_form')[0].reset();
-                alert("modal 창을 dismiss"); // TODO:
+                $('#ajax-comment-modal').modal('hide');
             });
         });
     </script>
