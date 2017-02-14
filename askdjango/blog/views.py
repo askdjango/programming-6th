@@ -82,6 +82,9 @@ def comment_new(request, post_pk):
 @login_required
 def comment_edit(request, post_pk, pk):
     comment = Comment.objects.get(pk=pk)
+    if comment.user != request.user:
+        messages.warning(request, '댓글 작성자만 수정할 수 있습니다.')
+        return redirect(comment.post)
 
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES, instance=comment)
@@ -99,6 +102,10 @@ def comment_edit(request, post_pk, pk):
 @login_required
 def comment_delete(request, post_pk, pk):
     comment = Comment.objects.get(pk=pk)
+    if comment.user != request.user:
+        messages.warning(request, '댓글 작성자만 삭제할 수 있습니다.')
+        return redirect(comment.post)
+
     if request.method == 'POST':
         comment.delete()
         messages.success(request, '댓글을 삭제했습니다.')
