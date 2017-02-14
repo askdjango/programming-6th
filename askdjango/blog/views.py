@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from blog.models import Post, Comment
 from blog.forms import PostForm, CommentForm
 
@@ -12,7 +12,13 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    post = Post.objects.get(pk=pk)
+#   try:
+#       post = Post.objects.get(pk=pk)  # Post.DoesNotExist, Post.MultipleObjectsReturned
+#   except (Post.DoesNotExist, Post.MultipleObjectsReturned):
+#       raise Http404   # django.http.Http404
+
+    post = get_object_or_404(Post, pk=pk)
+
     return render(request, 'blog/post_detail.html', {
         'post': post,
     })
@@ -39,7 +45,7 @@ def post_new(request):
 
 @login_required
 def post_edit(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -60,7 +66,7 @@ def post_edit(request, pk):
 
 @login_required
 def comment_new(request, post_pk):
-    post = Post.objects.get(pk=post_pk)
+    post = get_object_or_404(Post, pk=post_pk)
 
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES)
@@ -81,7 +87,8 @@ def comment_new(request, post_pk):
 
 @login_required
 def comment_edit(request, post_pk, pk):
-    comment = Comment.objects.get(pk=pk)
+    comment = get_object_or_404(Comment, pk=pk)
+
     if comment.user != request.user:
         messages.warning(request, '댓글 작성자만 수정할 수 있습니다.')
         return redirect(comment.post)
@@ -101,7 +108,8 @@ def comment_edit(request, post_pk, pk):
 
 @login_required
 def comment_delete(request, post_pk, pk):
-    comment = Comment.objects.get(pk=pk)
+    comment = get_object_or_404(Comment, pk=pk)
+
     if comment.user != request.user:
         messages.warning(request, '댓글 작성자만 삭제할 수 있습니다.')
         return redirect(comment.post)
