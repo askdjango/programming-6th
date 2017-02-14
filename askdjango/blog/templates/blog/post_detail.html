@@ -55,6 +55,7 @@ function initMap() {
         <li>
             {{ comment.message }}
             <small>by {{ comment.user }}</small>
+            <a href="{% url "blog:comment_edit" post.pk comment.pk %}">Edit</a>
         </li>
     {% endfor %}
     </ul>
