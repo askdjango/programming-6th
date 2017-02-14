@@ -45,6 +45,10 @@ function initMap() {
         <div id="map" data-lat="{{ post.lat }}" data-lng="{{ post.lng }}"></div>
     {% endif %}
 
+    {% if post.photo %}
+        <img src="{{ post.photo.url }}" style="max-width: 100%;" />
+    {% endif %}
+
     {{ post.content|linebreaks }}
 
     <hr/>
