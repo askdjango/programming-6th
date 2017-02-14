@@ -8,7 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ['title']
     list_filter = ['created_at']
     search_fields = ['title']
-    form = PostForm
+    # form = PostForm
 
     def content_length(self, post):
         return '{}글자'.format(len(post.content))

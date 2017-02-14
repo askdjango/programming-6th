@@ -137,6 +137,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'statcfiles')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
 ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ['127.0.0.1']
