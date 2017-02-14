@@ -1,3 +1,5 @@
+import os
+import uuid
 import re
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -5,6 +7,16 @@ from django.core.urlresolvers import reverse
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.forms import ValidationError
+from django.utils import timezone
+
+
+def random_name_upload_to(instance, filename):
+    name = uuid.uuid4().hex
+    ext = os.path.splitext(filename)[-1].lower()
+    # datetime.datetime.now() # XXX
+    dir_path = timezone.now().strftime('%Y')  #/%m/%d/%H')
+    return os.path.join(dir_path, name[:2], name[2:4], name[4:] + ext)
+    # return os.path.join(dir_path, name + ext)
 
 
 def lnglat_validator(value):
@@ -19,7 +31,7 @@ class Post(models.Model):
             validators=[MinLengthValidator(10)],
             verbose_name='제목', help_text='포스팅 제목으로 노출됩니다. 최대 100자까지 지원됩니다.')  # descriptor syntax
     content = models.TextField(verbose_name='내용')
-    photo = models.ImageField(upload_to='blog/%Y/%m/%d/%H')
+    photo = models.ImageField(upload_to=random_name_upload_to)
     lnglat = models.CharField(max_length=50, blank=True,
             validators=[lnglat_validator])
     tag_set = models.ManyToManyField('Tag', blank=True)
