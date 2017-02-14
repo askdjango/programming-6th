@@ -1,4 +1,4 @@
-<!doctype html>
+{% load staticfiles %}<!doctype html>
 <html>
 <head>
 <meta charset="utf-8" />
@@ -21,6 +21,26 @@ body {
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{% static "jquery.csrf.js" %}"></script>
+<script>
+$(function() {
+    $('.ajax-confirm').click(function() {
+        var url = $(this).attr("href");
+        var message = $(this).data("message");
+        var target_id = $(this).data("target-id");
+
+        if ( confirm(message) ) {
+            $.post(url).done(function() {
+                $('#' + target_id).remove();
+            }).fail(function() {
+                alert("실패!");
+            });
+        }
+
+        return false;  // 실제 페이지이동을 막음.
+    });
+});
+</script>
 
 {% block extra_head %}
 {% endblock %}

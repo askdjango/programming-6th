@@ -1,9 +1,9 @@
-<li>
+<li id="comment-{{ comment.pk }}">
     {{ comment.message }}
     <small>by {{ comment.user }}</small>
 
     {% if comment.user == user %}
-    <a href="{% url "blog:comment_edit" comment.post.pk comment.pk %}">Edit</a>
-    <a href="{% url "blog:comment_delete" comment.post.pk comment.pk %}" class="text-danger">Delete</a>
+        <a href="{% url "blog:comment_edit" comment.post.pk comment.pk %}">Edit</a>
+        <a href="{% url "blog:comment_delete" comment.post.pk comment.pk %}" class="text-danger ajax-confirm" data-message="정말 삭제하시겠습니까?" data-target-id="comment-{{ comment.pk }}">Delete</a>
     {% endif %}
 </li>
