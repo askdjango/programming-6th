@@ -48,7 +48,16 @@ function initMap() {
     {{ post.content|linebreaks }}
 
     <hr/>
+
+    <form action="{% url "blog:comment_new" post.pk %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.message }}
+        <input type="submit" class="btn btn-primary btn-block" value="댓글 쓰기" />
+    </form>
+
+    <!--
     <a href="{% url "blog:comment_new" post.pk %}" class="btn btn-primary btn-block">댓글쓰기</a>
+    -->
 
     <ul>
     {% for comment in post.comment_set.all %}

@@ -18,9 +18,11 @@ def post_detail(request, pk):
 #       raise Http404   # django.http.Http404
 
     post = get_object_or_404(Post, pk=pk)
+    comment_form = CommentForm()
 
     return render(request, 'blog/post_detail.html', {
         'post': post,
+        'comment_form': comment_form,
     })
 
 
