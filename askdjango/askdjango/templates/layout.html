@@ -24,7 +24,7 @@ body {
 <script src="{% static "jquery.csrf.js" %}"></script>
 <script>
 $(function() {
-    $('.ajax-confirm').click(function() {
+    $(document).on('click', '.ajax-confirm', function() {
         var url = $(this).attr("href");
         var message = $(this).data("message");
         var target_id = $(this).data("target-id");
