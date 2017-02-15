@@ -40,6 +40,14 @@ $(function() {
         return false;  // 실제 페이지이동을 막음.
     });
 
+    $(document).on('click', '.ajax-load', function() {
+        var url = $(this).attr("href");
+        var target_id = $(this).data("target-id");
+        $.get(url).done(function(html) {
+            $('#' + target_id).html(html);
+        });
+        return false;
+    });
 });
 </script>
 <script src="{% static "modal_form.js" %}"></script>

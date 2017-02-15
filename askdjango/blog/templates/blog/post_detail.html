@@ -114,10 +114,10 @@ function initMap() {
     -->
 
     <ul id="comment_list">
-    {% for comment in post.comment_set.all %}
-        {% include "blog/_comment.html" %}
-    {% endfor %}
+        {% include "blog/_comment_list.html" with comment_list=post.comment_set.all %}
     </ul>
+
+    <a href="{% url "blog:comment_list" post.pk %}" class="btn btn-default btn-block ajax-load" data-target-id="comment_list">댓글 새로고침</a>
 
     <hr/>
     <a href="{% url "blog:post_list" %}" class="btn btn-default">목록</a>
