@@ -86,7 +86,8 @@ def comment_new(request, post_pk):
             return redirect(comment.post)
     else:
         form = CommentForm()
-    return render(request, 'blog/comment_form.html', {
+
+    return render(request, 'blog/comment_form', {
         'form': form,
     })
 
@@ -103,11 +104,21 @@ def comment_edit(request, post_pk, pk):
         form = CommentForm(request.POST, request.FILES, instance=comment)
         if form.is_valid():
             comment = form.save()
+            if request.is_ajax():
+                return render(request, 'blog/_comment.html', {
+                    'comment': comment,
+                })
             messages.success(request, '기존 댓글을 수정했습니다.')
             return redirect(comment.post)
     else:
         form = CommentForm(instance=comment)
-    return render(request, 'blog/comment_form.html', {
+
+    if request.is_ajax():
+        template_name = '_modal_form.html'
+    else:
+        template_name = 'blog/comment_form.html'
+
+    return render(request, template_name, {
         'form': form,
     })
 

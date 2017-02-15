@@ -1,0 +1,20 @@
+<div class="modal fade" tabindex="-1">
+    <form action="{{ action_url|default:request.path }}" method="post">
+        {% csrf_token %}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">{{ title|default:"Form" }}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form }}
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="저장" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
