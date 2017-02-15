@@ -94,7 +94,7 @@ def comment_new(request, post_pk):
     else:
         form = CommentForm()
 
-    return render(request, 'blog/comment_form', {
+    return render(request, 'blog/comment_form.html', {
         'form': form,
     })
 
